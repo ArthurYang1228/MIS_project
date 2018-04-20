@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<!DOCTYPE html>
+<html>
+<center>
+<head>
+	<title>修改關鍵字</title>
+</head>
+
+<body>	
+	{% for keyword in update %}
+	<form method="post" action="">
+		關鍵字:<input type="text" class="input" name="keyword" value="{{ keyword.keyword }}"><br>
+		回覆:<input type="text" class="input" name="response" value="{{ keyword.response }}"><br>
+		型態:<input type="text" class="input" name="response_type" value="{{ keyword.response_type }}"><br>
+		<div id = "buttonSection">
+			<input class = "button" type="submit" name="update" onClick="location.href='/key/'" value="修改">
+			<input class = "button" type="button" value="取消" onClick="location.href='/key/'"><br>&nbsp;&nbsp;
+		</div>		
+	</form>
+	{% endfor %}
+</body>
+</center>
+</html>
+
+

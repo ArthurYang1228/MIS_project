@@ -1,0 +1,83 @@
+body{
+	font-family: 微軟正黑體;
+	background-color: white;
+	text-align: center;
+}
+
+form{
+	border: 5px solid #80aaff;
+	border-radius: 5px;
+	width: 500px;
+	height: 700px;
+	margin: 15px 0 0 0;
+	margin: auto;
+	position:relative;
+}
+
+.name_container{
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0px;
+	background-color: #80aaff;
+	border-bottom: 1px solid grey;
+	padding: 15px;
+	font-size: 18px;
+}
+
+.message_container{
+	height: 535px;
+	padding: 10px;
+	text-align: left;
+	overflow: auto;
+}
+
+.message{
+	background: #4080FF;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+	margin-left:200px ;
+}
+
+.message2{
+	background: hsl(0, 100%, 80%);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+	margin-right:200px ;
+}
+
+.send_container{
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0px;
+	background-color: #80aaff;
+	border-top: 1px solid grey;
+	padding: 5px;
+	font-size: 18px;
+	position: absolute;
+	bottom: 0px;
+	text-align: left;
+}
+
+input[type=text]{
+	width: 80%;
+	overflow: auto;
+	text-overflow: 
+}
+
+.send{
+	background-color: #80aaff;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 22px;
+	position: absolute;
+	right: 30px;
+	margin-top: 3px;
+}
+.send:hover{
+	opacity: 0.7;
+}

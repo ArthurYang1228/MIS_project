@@ -1,0 +1,43 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>註冊安安</title>
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<form action = "/register/" method="POST" name="form2">
+	{% csrf_token %}
+		<div class="icon_container">
+			<i class="fas fa-user icon"></i>
+		</div>
+
+		<div class="container">
+			<label><b>姓名</b></label>
+			<input id="name" type="text" name="name" placeholder="輸入姓名" required>
+			<label><b>信箱</b></label>
+			<input id="email" type="text" name="email" placeholder="填入信箱" required>
+			<label><b>密碼</b></label>
+			<input id="password" type="password" name="password" placeholder="輸入密碼" required>
+			<label><b>性別</b></label>
+			<br>
+			<input type="radio" id="gender" name="gender" value="M">男
+			<input type="radio" id="gender" name="gender" value="F">女<br>
+			<label><b>生日</b></label>
+			<input id="birthday" type="date" name="birthday" required>
+			<input type="hidden" name="ok" value="yes">
+
+			<input type="submit" value="註冊">
+		</div>
+
+		<div class="gotore">
+			<a href="">登入</a>
+		</div>
+
+	</form>
+</body>
+</html>

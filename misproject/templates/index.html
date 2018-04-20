@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+
+{% for i in member %}
+                 <p>
+                 <a href="/dialog/{{i.id}}/">{{i.name}}'s dialog</a>
+                 </p>
+{% endfor %}
+</body>
+</html>

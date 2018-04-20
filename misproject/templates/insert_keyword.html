@@ -1,0 +1,79 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!DOCTYPE html>
+<html>
+<center>
+<head>
+	<title>新增關鍵字</title>
+</head>
+<body>
+	<header>
+		<!-- <img id="pinkoi_icon" src="../pic/pinkoi.png" width="20%"> -->
+		<div id = "slogan">
+			Dr. 安安
+		</div>
+		<div id = "siteName">
+			健康管理機器人
+		</div>
+		<br><br>
+	</header>
+
+	<form method="post" action="">
+	  	<div class="input-group">
+	  		<label>關鍵字</label>
+	  		<input type="text" name="keyword" placeholder="keyword" required>
+	  	</div>
+	  	<div class="input-group">
+	  		<label>回覆</label>
+	  		<input type="text" name="response" placeholder="response" required>
+	  	</div>
+	    <div class="input-group">
+			<label>型態</label>
+			<select name="response_type" required>
+				<option value="">請選擇</option>
+				<option value=1>1 文字</option>
+				<option value=2>2 選項</option>
+	          	<option value=3>3 圖片</option>
+			</select>
+	    </div>
+	    <br>	  	
+	  	<div class="input-group">
+	  		<button type="submit" class="btn" name="create" >確定</button>
+	  	</div>
+	</form>
+    <div id = "buttonSection">
+        <button class = "button" onClick="location.href='/key/'"><span><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;上一頁
+        </span></button>
+    </div>
+
+</body>
+</center>
+</html>
+
+<!-- 	<form method="post" action="">
+		<table id = "table" border="2">
+        <tr>
+        	<td>關鍵字</td>
+        	<td><input type="text" name="keyword" placeholder="keyword" ></td>
+        </tr>
+        <tr>
+        	<td>回覆</td>
+        	<td><input type="text" name="response" placeholder="response"></td>
+        </tr>
+        <tr>
+        	<td>型態</td>
+            <td><select name="response_type">
+					<option value="">請選擇</option>
+					<option value=1>1 文字</option>
+					<option value=2>2 選項</option>
+		          	<option value=3>3 圖片</option>
+				</select>
+			</td>        	
+        </tr>
+        <tr>
+        	<div id = "buttonSection">
+        		<button type="submit" class="btn" name="create">確定</button>
+        		<input class = "button" type="button" value="取消" onClick="location.href='/key/'"><br>&nbsp;&nbsp;
+        	</div>
+        </tr>
+    </form> -->

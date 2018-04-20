@@ -1,0 +1,44 @@
+.test{width:600px; padding:200px 100px; border:5px solid #beceeb; position:relative;}
+.test span{width:0; height:0; font-size:0; overflow:hidden; position:absolute;}
+.test span.bot{
+border-width:20px;
+border-style:solid dashed dashed;
+border-color:#beceeb transparent transparent;
+left:80px;
+bottom:-40px;
+}
+.test span.top{
+border-width:20px;
+border-style:solid dashed dashed;
+border-color:#ffffff transparent transparent;
+left:80px;
+bottom:-33px;
+}
+.bubble
+{
+position: relative;
+width: 300px;
+height: 70px;
+padding: 10px;
+background: #99CCCC;
+-webkit-border-radius: 10px;
+border-radius: 80px;
+}
+
+.bubble:after
+{
+content: "";
+position: absolute;
+bottom: -20px;
+left: 140px;
+border-style: solid;
+
+ /* 上 右 下 左 */
+border-width:  20px 10px 10px 10px;
+border-color: #99CCCC transparent transparent transparent;
+
+display: block;
+width: 0;
+z-index: -1;
+}
+

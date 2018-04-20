@@ -55,12 +55,27 @@ def post(request, pk):
     current_time = datetime.now()
     member = Dialog.objects.filter(member=Member.objects.get(pk=pk))
     name = Member.objects.get(pk=pk)
+
     if request.method == "POST":
         text = request.POST['data']
-
         unit = Dialog.objects.create(content=text, time='', member=name)
         unit.save()
-        get_res(text, pk)
+        if  Keyword.objects.filter(keyword=text):
+            key = Keyword.objects.get(keyword=text)
+            if key.response_type == 1:
+                unit = Dialog.objects.create(content=key.response, time='', member=name, who=False)
+                unit.save()
+            elif key.response_type == 2:
+
+                response = key.response.split(';')
+                unit = Dialog.objects.create(content=response[0], time='', member=name, who=False)
+                unit.save()
+                choice = response[1]
+
+
+
+        else:
+            get_res(text, pk)
 
 
     else:

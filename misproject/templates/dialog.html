@@ -3,51 +3,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="{% static 'css/dialog.css' %}">
-	<title>安安聊天室</title>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+  <title>Crobot聊天室</title>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 </head>
 
 
 <body>
 
-    <form action=/dialog/{{pk}}/ method="POST" name="form1">
-    {% csrf_token %}
-    	<div class="name_container">
-    		{{name}}
-    	</div>
-    	<p>{{ current_time }}</p>
 
-    	<div class="message_container" id="message">
-        	{% for i in member %}
-	        	{% if i.who == False %}
-	        	<p class="message2">安安：{{i.content}}({{i.time}}</p>
-	        	{% else %}
-	        	<p class="message">{{i.member.name}}:{{i.content}}({{i.time}})</p>
-	        	{% endif %}
-        	{% endfor %}
+    <div class="dialog">
+      <div class="name_container">
+        {{name}}
+      </div>
+      <p>{{ current_time }}</p>
 
-  		</div>
+      <div class="message_container" id="message">
+          {% for i in member %}
+            {% if i.who == False %}
+            <p class="message2">Crobot：{{i.content}}({{i.time}}</p>
+            {% else %}
+            <p class="message">{{i.member.name}}:{{i.content}}({{i.time}})</p>
+            {% endif %}
+          {% endfor %}
 
-  		<div class="send_container">
-  			<input type="text" name="data"/>
-  			<button type="submit" class="send">
-  				<i type="submit" class="fas fa-paper-plane"></i>
-  			</button>
-  		</div>
+          {% if choice != null %}
+          <div class="choice">
+            {% for i in all %}
+            <form action=/dialog/{{pk}}/ method="POST" name="choice1">
+              <input type="hidden" name="data" value="{{i}}">
+              <input type="submit" name="" value="{{i}}">
+            </form>
+            {% endfor %}
+          </div>
+          {% endif %}
+      </div>
 
-		<script type="text/javascript">
-			var div = document.getElementById('message');
-			div.scrollTop = div.scrollHeight - div.clientHeight;
-		</script>
+      <div class="send_container">
+        <form action=/dialog/{{pk}}/ method="POST" name="form1">
+        {% csrf_token %}
+          <div class="one">
+            <button type="button" class="bar" onclick="fun()">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+          <div class="two">
+            <input type="text" name="data"/>
+          </div>
+          <div class="three">
+            <button type="submit" class="send">
+              <i type="submit" class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    <div id="choice" class="bar_choice">
+      <form action=/dialog/{{pk}}/ method="POST" name="choice1">
+        <input type="hidden" name="data" value="症狀查詢">
+        <input type="submit" name="" value="症狀查詢">
+      </form>
+      <form action=/dialog/{{pk}}/ method="POST" name="choice2">
+        <input type="hidden" name="data" value="尋找醫院">
+        <input type="submit" name="" value="尋找醫院">
+      </form>
+      <form action=/dialog/{{pk}}/ method="POST" name="choice3">
+        <input type="hidden" name="data" value="提醒吃藥">
+        <input type="submit" name="" value="提醒吃藥">
+      </form>
+    </div>
+
+      <script type="text/javascript">
+        function fun() {
+          var x = document.getElementById("choice");
+          if (x.style.display === "block") {
+              x.style.display = "none";
+          } else {
+              x.style.display = "block";
+          }
+      } 
+      </script>
 
 
-      	<!--
-	      	<div style="top:425px;left:400px;position:absolute;">{{name}}: <input type="text" name="data"/></div>
-	      	<input style="top:425px;left:730px;position:absolute;" type="submit" value="傳送" />
-      	-->
-    </form>
+      <script type="text/javascript">
+      var div = document.getElementById('message');
+      div.scrollTop = div.scrollHeight - div.clientHeight;
+    </script>
+    </div>
 
 
 

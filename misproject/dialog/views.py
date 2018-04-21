@@ -71,6 +71,7 @@ def post(request, pk):
                 unit = Dialog.objects.create(content=response[0], time='', member=name, who=False)
                 unit.save()
                 choice = response[1]
+                all = choice.split(',')
 
 
 

@@ -4,11 +4,11 @@ body{
 	text-align: center;
 }
 
-form{
+.dialog{
 	border: 5px solid #80aaff;
 	border-radius: 5px;
 	width: 500px;
-	height: 700px;
+	height: 540px;
 	margin: 15px 0 0 0;
 	margin: auto;
 	position:relative;
@@ -25,7 +25,7 @@ form{
 }
 
 .message_container{
-	height: 535px;
+	height: 360px;
 	padding: 10px;
 	text-align: left;
 	overflow: auto;
@@ -47,6 +47,7 @@ form{
 	color: white;
 	padding: 10px;
 	margin-right:200px ;
+	position: relative;
 }
 
 .send_container{
@@ -61,23 +62,80 @@ form{
 	bottom: 0px;
 	text-align: left;
 }
-
-input[type=text]{
+.send_container .one{
+	width: 10%;
+	float: left;
+}
+.send_container .two{
 	width: 80%;
-	overflow: auto;
-	text-overflow: 
+	float: left;
+}
+.send_container .three{
+	width: 10%;
+	float: left;
 }
 
-.send{
-	background-color: #80aaff;
+.bar{
+	margin: 0 8px;
+}
+
+.bar_choice{
+	box-sizing: border-box;
+	width: 40%;
+	margin-left: 10px;
+	text-align: center;
+	font-size: 18px;
+	position: absolute;
+	bottom: 45px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	overflow: hidden;
+	display: none;
+}
+
+.choice{
+	box-sizing: border-box;
+	width: 40%;
+	margin-left: 10px;
+	text-align: center;
+	font-size: 18px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+input[type=text]{
+	width: 90%;
+	overflow: auto; 
+}
+
+input[type=submit]{
+	width: 100%;
+	border: none;
+	margin: 0px;
+	cursor: pointer;
+	background: #eee;
+	color: grey;
+	padding: 8px 0;
+}
+input[type=submit]:hover{
+	background: #ccc;
+}
+
+button{
+	background: none;
 	color: white;
 	border: none;
 	cursor: pointer;
-	font-size: 22px;
-	position: absolute;
-	right: 30px;
-	margin-top: 3px;
+	font-size: 18px;
+	opacity: 0.8;
 }
-.send:hover{
-	opacity: 0.7;
+button:hover{
+	opacity: 1;
+}
+
+.send{
+	position: absolute;
+	right: 20px;
+	margin-top: 3px;
 }

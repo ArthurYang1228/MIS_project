@@ -5,6 +5,19 @@ from .models import Member, Dialog, Keyword
 import requests
 import json
 import time
+from django_q.tasks import async, result
+from django_q.models import Schedule
+import arrow
+
+def auto_remind(a,b):
+    unit= Schedule.objects.create(func='dialog.tasks.med',
+                        hook = 'hooks.print_result',
+                        args = '',
+                        schedule_type=Schedule.ONCE,
+                        next_run = arrow.utcnow().replace(hour=a, minute=b).format('YYYY-MM-DD HH:mm:ss')
+                        )
+    unit.save()
+
 
 
 
@@ -41,6 +54,7 @@ def register(request):
         birthday = request.POST["birthday"]
         new_member = Member.objects.create(name=name, gender=gender, email=email, password=password, birthday=birthday)
         new_member.save()
+
         return redirect('/')
     else:
         ""
@@ -57,9 +71,11 @@ def post(request, pk):
     name = Member.objects.get(pk=pk)
 
     if request.method == "POST":
+
         text = request.POST['data']
         unit = Dialog.objects.create(content=text, time='', member=name)
         unit.save()
+
         if  Keyword.objects.filter(keyword=text):
             key = Keyword.objects.get(keyword=text)
             if key.response_type == 1:
@@ -74,27 +90,36 @@ def post(request, pk):
                 all = choice.split(',')
 
 
-
+        elif text == '帥組長':
+            unit = Dialog.objects.create(content='我也覺得,承霖真的很帥', time='', member=name, who=False)
+            unit.save()
         else:
+
             get_res(text, pk)
+
 
 
     else:
         text=""
+
+
     return render(request, 'dialog.html', locals())
 
 
 
-def get_res(text, pk, port=8080):
+def get_res(text, pk, port=8000):
 
-    url = "http://127.0.0.1:{}/chatterbot/".format(port)
+    url = "140.119.19.33:{}/chatterbot/".format(port)
     current_time = datetime.now()
     member = Dialog.objects.filter(member=Member.objects.get(pk=pk))
     name = Member.objects.get(pk=pk)
+
     try:
+
         r = json.loads(requests.post(url, json={'text': text}).content.decode())
         unit = Dialog.objects.create(content=r['text'], time='', member=name, who=False)
         unit.save()
+
     except:
         unit = Dialog.objects.create(content="I don't know", time='', member=name, who=False)
         unit.save()
@@ -128,6 +153,9 @@ def delete_key_word(request, id):
 	delete = Keyword.objects.filter(id=keyword_id)
 	delete.delete()
 	return render(request,"delete_keyword.html",locals())
+
+def location(request):
+	return render(request,"location.html")
 
 
 

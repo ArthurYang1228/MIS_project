@@ -43,7 +43,7 @@ class Keyword(models.Model):
         (picture, 'PICTURE'))
     keyword = models.CharField(max_length=20)
     response = models.CharField(max_length=100)
-    response_type = models.IntegerField(max_length=5, choices=response_type_choices, default=text)
+    response_type = models.CharField(max_length=5, choices=response_type_choices, default=text)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

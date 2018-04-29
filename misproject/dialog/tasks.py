@@ -1,2 +1,2 @@
-def hello():
-    print("hello")
+def med():
+    print('Time to eat medcines!')

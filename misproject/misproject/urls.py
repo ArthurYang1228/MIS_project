@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^key/new/$', views.new_key_word),
     url(r'^key/update/(?P<id>\d+)/$', views.update_key_word),
     url(r'^key/delete/(?P<id>\d+)/$', views.delete_key_word),
+    url(r'^location/$', views.location),
     url(
         r'^chatterbot/',
         include('chatterbot.ext.django_chatterbot.urls',

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>定位</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script>
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    if (navigator.geolocation) {
+        var option = {
+            enableAcuracy: false,
+            maximumAge: 0, //每次執行都會重新查詢目前位置
+            timeout: 30000 //查詢等候時間可容許至30秒
+        };
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, option);
+        // **getCurrentPosition() 取得目前位置(僅一次,沒有傳回值)
+        // **successCallback 回傳函式,必要參數
+        // **errorCallback 回傳函式,非必要參數
+    } else {
+        alert("此瀏覽器不支援地理定位功能!");
+    }
+
+    function successCallback(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        var myurl = "../location/"+lat+'-'+lng;
+        document.location.href = myurl;
+    }
+
+    function errorCallback(error) {
+        var errorTypes = {
+            0: "不明原因錯誤",
+            1: "使用者拒絕提供位置資訊",
+            2: "無法取得位置資訊",
+            3: "位置查詢逾時"
+        };
+        alert(errorTypes[error.code]);
+    }
+    </script>
+</head>
+
+<body>
+<!--     <form method="get" action="">
+        <input id="lat" type="text" class="input" name="lat"><br>
+        <input id="lng" type="text" class="input" name="lng">   
+    </form> -->
+<!--     <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBthUO8-s6a_uhCV5UcVv5jsKvX-yTFlTM&libraries=places&callback=initMap" async defer></script>
+    <meta http-equiv="refresh" content="0;url="myurl /> -->
+</body>
+
+</html>

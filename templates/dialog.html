@@ -1,0 +1,188 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "53af60e2-5c37-49e4-9b46-f58c6e329366",
+    });
+  });
+</script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+  <title>Crobot聊天室</title>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class="dialog">
+
+	<div class="name_container" id="username">
+	  {{name}}
+	</div>
+	<p>&nbsp</p>
+
+	<div class="message_container" id="message">
+	  {% for i in member %}
+		{% if i.who == False %}
+		<!--<p class="message2">Crobot：{{i.content}}({{i.time}})</p>-->
+		  {% if 'https://140.119.19.33:8080' in i.content %}
+			<p class="message3">({{i.time}})<br><iframe src={{i.content}} width="350" height="300" frameborder="0" scrolling="no"></iframe></p>
+          {% elif '/static/images/' in i.content %}
+            <p><img src={{i.content}} width="120" height="120"></p>
+		  {% else %}
+			<p class="message2" >{{i.content}}({{i.time}})</p>
+		  {% endif %}
+		{% else %}
+          <!--{% if "https://github.com" in i.content %}-->
+            <!--<p class=="message_img"><img src={{i.content}} width="100" height="100" align="right"></p>-->
+		  <!--{% else %}-->
+		    <p class="message">{{i.content}}({{i.time}})</p>
+          <!--{% endif %}-->
+		{% endif %}
+	  {% endfor %}
+
+	  {% if choice != None %}
+        <div class="choice" id="choose">
+		{% for i in all %}
+		<form action=/dialog/{{pk}}/ method="POST" name="choice1" >
+		  <input type="hidden" name="data" value="{{i}}" id="{{i}}">
+		  <input type="submit" name="" value="{{i}}" onclick="showMessage('{{i}}');">
+		</form>
+		{% endfor %}
+
+        {% if loc != None %}
+        <script>
+        if (navigator.geolocation) {
+            var option = {
+                enableAcuracy: false,
+                maximumAge: 0, //每次執行都會重新查詢目前位置
+                timeout: 30000 //查詢等候時間可容許至30秒
+            };
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback, option);
+        } else {
+            alert("此瀏覽器不支援地理定位功能!");
+        }
+
+        function successCallback(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var myurl = "https://140.119.19.33:8080/location/"+lat+'-'+lng;
+            document.getElementById("我要尋找").setAttribute("value", myurl);
+        }
+
+        function errorCallback(error) {
+            var errorTypes = {
+                0: "不明原因錯誤",
+                1: "使用者拒絕提供位置資訊",
+                2: "無法取得位置資訊",
+                3: "位置查詢逾時"
+            };
+            alert("請先開啟定位功能,"+errorTypes[error.code]);
+        }
+        </script>
+        {% endif %}
+	  </div>
+	  {% endif %}
+
+	  <p class="message" id="newMessage" hidden >  </p>
+	</div>
+
+	<div class="send_container">
+	  <form action=/dialog/{{pk}}/ method="POST" name="form1" onsubmit="showMessage();">
+	  {% csrf_token %}
+		<div class="one">
+		  <button type="button" class="bar" onclick="fun()">
+			<i class="fas fa-bars"></i>
+		  </button>
+		</div>
+		<div class="two">
+		  <input type="text" name="data" id="data"/>
+		</div>
+		<div class="three">
+		  <button type="submit" class="send" >
+			<i type="submit" class="fas fa-paper-plane" ></i>
+		  </button>
+		</div>
+	  </form>
+	</div>
+
+	<div id="choice" class="bar_choice">
+	  <form action=/dialog/{{pk}}/ method="POST" name="choice1" onsubmit="showMessage('症狀查詢');">
+		<input type="hidden" name="data" value="症狀查詢">
+		<input type="submit" name="" value="症狀查詢">
+	  </form>
+	  <form action=/dialog/{{pk}}/ method="POST" name="choice2" onsubmit="showMessage('尋找醫院');">
+		<input type="hidden" name="data" value="尋找醫院">
+		<!--<input type="hidden" name="url" value="" id="url">-->
+		<input type="submit" name="" value="尋找醫院">
+	  </form>
+	  <form action=/dialog/{{pk}}/ method="POST" name="choice3">
+		<input type="hidden" name="data" value="提醒吃藥" onsubmit="showMessage('提醒吃藥');">
+		<input type="submit" name="" value="提醒吃藥">
+	  </form>
+	</div>
+
+	<script type="text/javascript">
+	  function fun() {
+		var x = document.getElementById("choice");
+		if (x.style.display === "block") {
+			x.style.display = "none";
+		} else {
+			x.style.display = "block";
+		}
+	  }
+	</script>
+	<script type="text/javascript">
+	var div = document.getElementById('message');
+	div.scrollTop = div.scrollHeight - div.clientHeight;
+	</script>
+	<script type="text/javascript">
+	function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+    }
+
+	function showMessage(str){
+	    var today=new Date();
+
+        var currentDateTime =
+        "(" +
+
+        today.getFullYear()+'年'+
+
+        (today.getMonth()+1)+'月'+
+
+        today.getDate()+'日 '+
+
+        addZero(today.getHours())+':'+addZero(today.getMinutes())+
+
+        ')';
+      if (!str){
+	  document.getElementById("newMessage").innerHTML = document.getElementById('data').value+ currentDateTime;
+	  }else{
+	   document.getElementById("newMessage").innerHTML = str + currentDateTime;
+	  }
+      document.getElementById("newMessage").hidden = false;
+	  var div = document.getElementById('message');
+	  div.scrollTop = div.scrollHeight - div.clientHeight;
+	  document.getElementById("data").hidden = true;
+	  document.getElementById("choice").style.display = "none";
+
+	  document.getElementById("choose").style.display = "none"
+
+
+	}
+	</script>
+
+  </div>
+
+</body>
+</html>

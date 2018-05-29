@@ -1,0 +1,58 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "53af60e2-5c37-49e4-9b46-f58c6e329366",
+    });
+  });
+</script>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<title>登入Crobot</title>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+	<form action = "" method="POST">
+	{% csrf_token %}
+		<div class="icon_container">
+			<i class="fas fa-user icon"></i>
+		</div>
+
+		<div class="container">
+			<label><b>電子郵件</b></label>
+			<input type="text" id ="email" name="email" placeholder="輸入你的信箱" required>
+			<label><b>密碼</b></label>
+			<input type="password" id = "password" name="password" placeholder="輸入密碼" required>
+			<input type="hidden" name="ok" value="yes">
+			<input type="submit" value="登入">
+			<input type="checkbox" checked="checked" name="remember">記住我
+		</div>
+
+		<div class="gotore">
+			<a href="/register/">註冊</a>
+		</div>
+
+	</form>
+
+		{% if verified == False %}
+		<script>alert("帳號密碼輸入有誤!")</script>
+		{% endif %}
+		{% if verified %}
+		<script> document.location.href="/dialog/{{correct.id}}/"</script>
+		{% endif %}
+		
+		{% if manage %}
+		<script> document.location.href="/key/"</script>
+		{% endif %}
+
+
+</body>
+</html>

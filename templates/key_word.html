@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<html>    
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="{% static 'css/key_word.css' %}">
+        <title>關鍵字管理</title>
+    </head>
+    
+    <body>
+    <center>
+	<header>
+	<div id = "siteName">
+	Crobot 關鍵字管理系統
+	</div>
+	<div id = "slogan">
+	照顧你健康的歐巴
+	</div>	
+	</header>
+
+
+        <div id = "buttonSection">
+            <button class = "button" onClick="location.href='/key/new/'"><span><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;新增</span></button>
+        </div>
+        <table id = "table" width="736" height="86" border="2">
+            <tr>
+                <td>id</td>
+                <td>keyword</td>
+                <td>response</td>
+                <td>type</td>
+                <td>update</td>
+                <td>delete</td>
+            </tr>
+            {% for keyword in keyword_list %}
+            <tr>
+                <td>{{ keyword.id }}</td>
+                <td>{{ keyword.key }}</td>
+                <td>{{ keyword.response }}</td>
+                <td>{{ keyword.response_type }}</td>
+                <td>
+                    <form method="get" action="/key/update/{{keyword.id}}/">
+                    <button type="submit" class="btn" name="id" value={{keyword.id}}>修改</button>
+                    </form>
+                </td>            
+                <td>
+                    <form method="get" action="/key/delete/{{keyword.id}}/">
+                    <button type="submit" class="btn" name="id" value={{keyword.id}}>刪除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+    </body>
+</html>
+
+

@@ -8,7 +8,7 @@ body{
 	border: 5px solid #80aaff;
 	border-radius: 5px;
 	width: 500px;
-	height: 540px;
+	height: 590px;
 	margin: 15px 0 0 0;
 	margin: auto;
 	position:relative;
@@ -25,7 +25,7 @@ body{
 }
 
 .message_container{
-	height: 360px;
+	height: 410px;
 	padding: 10px;
 	text-align: left;
 	overflow: auto;
@@ -47,6 +47,16 @@ body{
 	color: white;
 	padding: 10px;
 	margin-right:200px ;
+	position: relative;
+}
+
+.message3{
+	background: hsl(0, 100%, 80%);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+	margin-right:100px ;
 	position: relative;
 }
 

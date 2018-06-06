@@ -5,6 +5,11 @@
 <center>
 <head>
 	<title>新增關鍵字</title>
+	<script type="text/javascript">
+		function f() {
+			alert("新增成功!");
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -36,15 +41,13 @@
 	          	<option value=3>3 圖片</option>
 			</select>
 	    </div>
-	    <br>	  	
+	    <br>
 	  	<div class="input-group">
 	  		<button type="submit" class="btn" name="create" >確定</button>
+	  		<input class = "button" type="button" value="取消" onClick="location.href='/key/'">
 	  	</div>
 	</form>
-    <div id = "buttonSection">
-        <button class = "button" onClick="location.href='/key/'"><span><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;上一頁
-        </span></button>
-    </div>
+
 
 </body>
 </center>

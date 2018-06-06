@@ -1,9 +1,71 @@
 #encoding = utf-8
 import requests
 import json
+
 from bs4 import BeautifulSoup
 import csv
 import urllib
+from selenium import webdriver
+import time
+import os
+import shutil
+import re
+import jieba
+import wordcloud
+
+
+
+
+
+
+
+
+
+def fluforecase(threshold=80000):
+    downloadPath = "//home//kevin//下載//_門急診類流感總就診人次.csv"
+    # with open(path, 'r', encoding="utf8") as file:
+    #     reader = csv.reader(file)
+    #     for row in reader:
+    #         print(row)
+    # if os.path.exists(path):
+    #     shutil.move(path,"flu_predict.csv")
+
+    path = "//home//kevin//TrueProject//misproject//dialog//fluforecase.csv"
+
+
+    browser = webdriver.Chrome(executable_path= "//home//kevin//TrueProject//misproject//dialog//chromedriver")
+
+    browser.get('https://fluforecast.cdc.gov.tw/#/AllTaiwan')
+    #browser.maximize_window()
+    time.sleep(3)
+
+    browser.find_element_by_xpath("(//button[@type='button'])[9]").click()
+    time.sleep(3)
+    #browser.find_element_by_class_name("btn btn-download-csv")[0].click()
+    browser.find_element_by_xpath("(//button[@type='button'])[6]").click()
+
+
+    time.sleep(4)
+    browser.close()
+
+
+    if os.path.exists(downloadPath):
+        if os.path.exists(path):
+            os.remove(path)
+        shutil.move(downloadPath, path)
+        with open(path, 'r', encoding="utf8") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                print(row)
+                if row[0] =='Ensemble':
+
+                    send =  float(row[1])>threshold
+    if send:
+        return "流感爆發囉"
+    else:
+        return "最近流感疫情還好"
+
+
 
 def get_udn():
     url = 'https://health.udn.com/health/disease_list'
@@ -69,4 +131,3 @@ with open('example4.csv','r') as file:
     for row in reader:
         print(row['症狀'])
 '''
-get_udn()

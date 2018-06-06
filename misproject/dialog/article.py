@@ -54,8 +54,20 @@ def write_sym_file():
                      else:
                             print(txt in symptom)
               file.close()
-write_sym_file()
+symptom = []
 
+def to_txt():
+       with open('sym.csv','r') as file:
+              reader = csv.DictReader(file)
+              print(reader)
+              for row in reader:
+                     print(row)
+                     symptom.append(row['症狀'])
+       print(symptom)
+       with open('sym.txt','w') as sym:
+              for s in symptom:
+                     sym.write(s +' 10'+' n\n')
+to_txt()
 '''
        while True:
               txt = input('sym:')
@@ -70,3 +82,4 @@ write_sym_file()
                      if i not in symptom:
                             symptom.append(i)
 '''
+

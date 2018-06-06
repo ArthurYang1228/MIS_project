@@ -1,12 +1,12 @@
 from django.contrib import admin
-from dialog.models import Member, Dialog, Keyword
+from dialog.models import Member, Dialog, Keyword, Symptom
 
 
 
 
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display=('id','name','gender','email','password','birthday')
+    list_display=('id','name','gender','email','password','birthday','playerid')
     ordering = ('id',)
 
 admin.site.register(Member,MemberAdmin)
@@ -20,3 +20,5 @@ class DialogAdmin(admin.ModelAdmin):
 admin.site.register(Dialog,DialogAdmin)
 
 admin.site.register(Keyword)
+
+admin.site.register(Symptom)
